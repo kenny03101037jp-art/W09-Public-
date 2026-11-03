@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>毛日安寵物美學工作室</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-amber-50 text-slate-800 font-sans">
+
+    <!-- 1. 工作室基本資料與服務介紹 (小於300字、電話、地址) -->
+    <header class="bg-white shadow-sm py-8 px-6 text-center max-w-3xl mx-auto mt-6 rounded-2xl">
+        <h1 class="text-3xl font-bold text-amber-600 mb-2">🐾 毛日安寵物美學工作室</h1>
+        <p class="text-slate-600 text-sm leading-relaxed max-w-xl mx-auto mb-4">
+            我們提供溫馨、無壓力的寵物美容與精緻spa服務。堅持以耐心陪伴每位毛孩，使用天然低敏洗劑，細心呵護皮膚健康與毛髮光澤，讓您的寶貝每次造訪都像回到家一樣安心舒適。
+        </p>
+        <div class="text-sm text-slate-500 space-y-1">
+            <p>📞 預約專線：0912-345-678</p>
+            <p>📍 工作室地址：高雄市前鎮區成功路二段 88 號</p>
+        </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-6 py-8 space-y-8">
+
+        <!-- 2. 換算功能：寵物年齡換算器 -->
+        <section class="bg-white p-6 rounded-2xl shadow-sm">
+            <h2 class="text-xl font-bold text-amber-700 mb-3">🐶 寵物年齡換算小工具</h2>
+            <p class="text-sm text-slate-500 mb-4">輸入毛孩的實際歲數，快速換算相當於人類幾歲：</p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+                <select id="petType" class="border rounded-lg p-2 text-sm">
+                    <option value="dog">小型犬</option>
+                    <option value="cat">貓咪</option>
+                </select>
+                <input type="number" id="petAge" placeholder="請輸入實際年齡(歲)" class="border rounded-lg p-2 text-sm" min="0" max="30">
+                <button onclick="calculateAge()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-4 rounded-lg text-sm transition">開始換算</button>
+            </div>
+            <div id="ageResult" class="text-amber-800 font-semibold text-sm bg-amber-50 p-3 rounded-lg hidden"></div>
+        </section>
+
+        <!-- 3. 衛教方式：健康小知識（至少兩則） -->
+        <section class="bg-white p-6 rounded-2xl shadow-sm">
+            <h2 class="text-xl font-bold text-amber-700 mb-3">💡 寵物照護健康小知識</h2>
+            <div class="space-y-4 text-sm">
+                <div class="border-l-4 border-amber-400 pl-4 py-1">
+                    <h3 class="font-bold text-slate-700">1. 定期梳毛與廢毛清理</h3>
+                    <p class="text-slate-600">每日幫毛孩梳毛不僅能減少家中飛毛，更能促進血液循環並及早發現皮膚異常或寄生蟲。</p>
+                </div>
+                <div class="border-l-4 border-amber-400 pl-4 py-1">
+                    <h3 class="font-bold text-slate-700">2. 適當的洗澡頻率</h3>
+                    <p class="text-slate-600">狗狗一般建議 1 至 2 週洗一次澡，過度頻繁清洗會洗掉皮膚保護性油脂，導致乾燥發癢。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 價目表 -->
+        <section class="bg-white p-6 rounded-2xl shadow-sm">
+            <h2 class="text-xl font-bold text-amber-700 mb-4">🏷️ 基礎與精緻洗澡價目表</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm border-collapse">
+                    <thead>
+                        <tr class="bg-amber-100 text-amber-900">
+                            <th class="p-3 rounded-l-lg">服務項目</th>
+                            <th class="p-3">小型犬 (10kg以下)</th>
+                            <th class="p-3">中型犬 (10-20kg)</th>
+                            <th class="p-3 rounded-r-lg">貓咪專區</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-amber-100">
+                        <tr>
+                            <td class="p-3 font-medium">基礎洗澡 (含清耳/剪指甲)</td>
+                            <td class="p-3">$600 起</td>
+                            <td class="p-3">$900 起</td>
+                            <td class="p-3">$800 起</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-medium">全套精緻美容 (含造型剪毛)</td>
+                            <td class="p-3">$1,000 起</td>
+                            <td class="p-3">$1,500 起</td>
+                            <td class="p-3">$1,300 起</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-6 text-xs text-slate-400">
+        © 2026 毛日安寵物美學工作室 版權所有
+    </footer>
+
+    <script>
+        function calculateAge() {
+            let type = document.getElementById('petType').value;
+            let age = parseFloat(document.getElementById('petAge').value);
+            let resultDiv = document.getElementById('ageResult');
+            
+            if (isNaN(age) || age < 0) {
+                resultDiv.innerText = "請輸入有效的年齡數字！";
+                resultDiv.classList.remove('hidden');
+                return;
+            }
+
+            let humanYears = type === 'dog' ? age * 7 : age * 6;
+            resultDiv.innerText = `換算結果：這相當於人類約 ${humanYears} 歲的成熟階段！`;
+            resultDiv.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
